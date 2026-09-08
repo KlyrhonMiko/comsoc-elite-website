@@ -8,6 +8,10 @@ import { X } from "lucide-react";
 import { ModalEvent, upcomingEvents, galleryEvents } from "@/lib/data/events";
 import EventCalendar from "./EventCalendar";
 
+function formatBudget(amount: number) {
+  return `₱${amount.toLocaleString()}`;
+}
+
 export default function EventsSection() {
   const [selectedEvent, setSelectedEvent] = useState<ModalEvent | null>(null);
   const [selectedDateRange, setSelectedDateRange] = useState<{ start: Date; end: Date } | null>(null);
@@ -135,15 +139,23 @@ export default function EventsSection() {
                         <div className="text-lg md:text-2xl font-heading font-light tracking-wide text-white group-hover:text-white/90">
                           {event.title}
                         </div>
-                        <div className="text-xs md:text-sm text-white/50 tracking-wider uppercase font-sans">
-                          {event.location} • {event.time}
+                        <div className="flex items-center gap-2 text-xs md:text-sm text-white/50 tracking-wider uppercase font-sans">
+                          <span>{event.location} • {event.time}</span>
                         </div>
                       </div>
                     </div>
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-black transition-all duration-300 shrink-0">
-                      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 md:w-3.5 md:h-3.5">
-                        <path d="M1 13L13 1M13 1H3.4M13 1V10.6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                    <div className="flex items-center gap-3 shrink-0">
+                      {event.budget && (
+                        <div className="hidden md:flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/[0.03]">
+                          <span className="text-[10px] uppercase tracking-[0.15em] text-white/40 font-heading">Budget</span>
+                          <span className="text-sm font-mono text-white/80">{formatBudget(event.budget)}</span>
+                        </div>
+                      )}
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white group-hover:bg-white group-hover:text-black transition-all duration-300">
+                        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 md:w-3.5 md:h-3.5">
+                          <path d="M1 13L13 1M13 1H3.4M13 1V10.6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </div>
                     </div>
                   </motion.div>
                 ))
@@ -297,6 +309,18 @@ export default function EventsSection() {
                       >
                         {selectedEvent.subtitle}
                       </motion.p>
+                    )}
+
+                    {selectedEvent.budget && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6 }}
+                        className="mt-8 p-4 border border-white/10 bg-white/[0.02] inline-flex flex-col gap-1"
+                      >
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-heading">Allocated Budget</span>
+                        <span className="text-2xl md:text-3xl font-display text-white">{formatBudget(selectedEvent.budget)}</span>
+                      </motion.div>
                     )}
                   </div>
                 </div>
