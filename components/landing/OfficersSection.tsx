@@ -3,12 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Mail, MapPin, Globe, ArrowRightLeft } from "lucide-react";
+import { ArrowRightLeft } from "lucide-react";
 import {
   comsocOfficers,
   ccsElites,
   facultyAdviser,
-  orgContact,
 } from "@/lib/data/officers";
 import type { Officer, Team } from "@/lib/data/officers";
 
@@ -230,68 +229,67 @@ export default function OfficersSection() {
         <OrgPyramid flipped={flipped} />
 
         {/* ── Faculty Adviser + Contact ── */}
-        <motion.div
-          {...fadeUp}
-          className="w-full flex flex-col md:flex-row gap-px border border-white/10 bg-white/10"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 pt-20 border-t border-white/10">
+
           {/* Faculty Adviser */}
-          <div className="flex-1 bg-[#121212] flex flex-col md:flex-row items-stretch border-b md:border-b-0 md:border-r border-white/10">
-            <div className="relative w-full md:w-36 lg:w-44 aspect-[4/5] md:aspect-auto overflow-hidden bg-[#0c0c0e] shrink-0">
-              <svg
-                viewBox="0 0 200 250"
-                className="absolute inset-0 w-full h-full text-white/[0.06]"
-                aria-hidden="true"
-              >
-                <g stroke="currentColor" strokeWidth="1" fill="none">
-                  <circle cx="100" cy="78" r="34" />
-                  <path d="M40 250c6-46 32-70 60-70s54 24 60 70" />
-                  <line x1="0" y1="250" x2="200" y2="250" strokeWidth="4" />
-                </g>
-              </svg>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#121212]/60 via-transparent to-transparent pointer-events-none" />
-            </div>
-            <div className="flex flex-col justify-center px-6 py-8 md:px-8 gap-2">
-              <div className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-heading font-bold">
-                {facultyAdviser.role}
+          <div className="flex flex-col gap-10">
+            <h3 className="text-sm font-heading font-bold tracking-[0.3em] uppercase text-white/50">
+              Faculty Adviser
+            </h3>
+            <div className="flex flex-col sm:flex-row items-start gap-8 group cursor-default">
+              <div className="relative w-32 h-40 overflow-hidden border border-white/10 shrink-0 group-hover:border-emerald-400/30 transition-colors duration-500">
+                <svg
+                  viewBox="0 0 200 250"
+                  className="absolute inset-0 w-full h-full text-white/[0.06]"
+                  aria-hidden="true"
+                >
+                  <g stroke="currentColor" strokeWidth="1" fill="none">
+                    <circle cx="100" cy="78" r="34" />
+                    <path d="M40 250c6-46 32-70 60-70s54 24 60 70" />
+                    <line x1="0" y1="250" x2="200" y2="250" strokeWidth="4" />
+                  </g>
+                </svg>
               </div>
-              <div className="text-lg md:text-xl font-display uppercase tracking-[0.12em] text-white">
-                {facultyAdviser.name}
-              </div>
-              <div className="text-sm font-sans text-white/50">
-                {facultyAdviser.department}
+              <div className="flex flex-col pt-2 gap-4">
+                <div className="text-3xl md:text-4xl font-display uppercase tracking-[0.1em] text-white">
+                  {facultyAdviser.name}
+                </div>
+                <div className="text-base font-sans text-white/60">
+                  {facultyAdviser.department}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Contact */}
-          <div className="flex-1 bg-[#121212] px-6 py-10 md:px-10 flex flex-col justify-center text-center md:text-left gap-4">
-            <div className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-heading font-bold">
-              {orgContact.label}
-            </div>
-            <a
-              href={orgContact.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg md:text-xl font-display tracking-[0.08em] text-white hover:text-white/70 transition-colors"
-            >
-              {orgContact.handle}
-            </a>
-            <div className="flex items-center justify-center md:justify-start gap-6 mt-2 text-white/40">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span className="text-xs font-heading tracking-wider">Email</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span className="text-xs font-heading tracking-wider">CCS Building</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Globe className="w-4 h-4" />
-                <span className="text-xs font-heading tracking-wider">Social</span>
-              </div>
+          {/* Contact Information */}
+          <div className="flex flex-col gap-10">
+            <h3 className="text-sm font-heading font-bold tracking-[0.3em] uppercase text-white/50">
+              Contact & HQ
+            </h3>
+            <div className="flex flex-col w-full">
+              {[
+                { label: "Email", value: "ccs.elite@university.edu", icon: "✉" },
+                { label: "Office", value: "CCS Building, Room 402", icon: "📍" },
+                { label: "Social", value: "@ccs_elite_org", icon: "❖" },
+              ].map((info, idx) => (
+                <div key={idx} className="flex justify-between items-center py-6 border-b border-white/10 group cursor-default">
+                  <div className="flex items-center gap-6">
+                    <span className="text-white/30 text-xl group-hover:text-emerald-400 transition-colors duration-300">
+                      {info.icon}
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.2em] text-white/50 font-heading">
+                      {info.label}
+                    </span>
+                  </div>
+                  <span className="text-base md:text-lg font-sans text-white/90">
+                    {info.value}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
-        </motion.div>
+
+        </div>
       </div>
     </section>
   );
