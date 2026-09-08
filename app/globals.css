@@ -106,3 +106,22 @@
 ::-webkit-scrollbar-track { background: #09090b; }
 ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+/* Hero Background */
+.hero-bg {
+  background-image: url("/images/bg/hero-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Horizon Glow */
+.horizon-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20vh;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  pointer-events: none;
+}

@@ -4,20 +4,15 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import SilverSunrise from "./SilverSunrise";
+
 import { upcomingEvents } from "@/lib/data/events";
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div id="home" className="bg-[#121212] h-[100dvh] w-full relative overflow-hidden font-sans text-white flex flex-col">
+    <div id="home" className="hero-bg bg-[#121212] h-[100dvh] w-full relative overflow-hidden font-sans text-white flex flex-col">
       
-      {/* 3D Immersive Background */}
-      <div className="absolute inset-0 z-0">
-        <SilverSunrise />
-      </div>
-
       {/* Main Content Overlay */}
       <div className="relative z-10 flex-1 p-6 md:p-8 lg:p-12 flex flex-col justify-between pointer-events-none w-full min-h-0">
         
@@ -176,6 +171,9 @@ export default function HeroSection() {
           ))}
         </motion.div>
       )}
+
+      {/* Horizon Glow */}
+      <div className="horizon-glow" aria-hidden="true" />
 
       {/* Latest Event Marquee */}
       {upcomingEvents.length > 0 && (
