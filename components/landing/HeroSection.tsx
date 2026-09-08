@@ -11,7 +11,10 @@ export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div id="home" className="hero-bg bg-[#121212] h-[100dvh] w-full relative overflow-hidden font-sans text-white flex flex-col">
+    <div id="home" className="bg-[#121212] h-[100dvh] w-full relative overflow-hidden font-sans text-white flex flex-col">
+      
+      {/* Background image — fades in independently */}
+      <div className="hero-bg absolute inset-0 z-0" />
       
       {/* Main Content Overlay */}
       <div className="relative z-10 flex-1 p-6 md:p-8 lg:p-12 flex flex-col justify-between pointer-events-none w-full min-h-0">
@@ -20,7 +23,7 @@ export default function HeroSection() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="flex justify-between items-start pointer-events-auto w-full"
         >
           {/* Top Left (empty or small branding) */}
