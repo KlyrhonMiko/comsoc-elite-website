@@ -4,12 +4,14 @@ import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowRightLeft } from "lucide-react";
+import { IconBrandFacebook, IconMail } from "@tabler/icons-react";
 import {
   comsocOfficers,
   ccsElites,
   facultyAdviser,
+  ccsElitesAdviser,
 } from "@/lib/data/officers";
-import type { Officer, Team } from "@/lib/data/officers";
+import type { Officer } from "@/lib/data/officers";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -25,9 +27,12 @@ const fadeUp = {
    ──────────────────────────────────────────────────────────── */
 function CardFace({ officer }: { officer: Officer }) {
   return (
-    <div className="flex flex-col w-full aspect-[4/5] border border-white/10 bg-white/[0.02]">
+    <div
+      className="flex h-[330px] w-full flex-col border border-white/10 bg-white/[0.02] md:h-[400px]"
+      style={{ backfaceVisibility: "hidden" }}
+    >
       {/* Portrait */}
-      <div className="relative w-full h-full overflow-hidden border-b border-white/10 bg-[#0c0c0e]">
+      <div className="relative min-h-0 w-full flex-1 overflow-hidden border-b border-white/10 bg-[#0c0c0e]">
         {officer.image ? (
           <Image
             src={officer.image}
@@ -52,13 +57,37 @@ function CardFace({ officer }: { officer: Officer }) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#121212]/60 via-transparent to-transparent pointer-events-none" />
       </div>
       {/* Text */}
-      <div className="flex flex-col gap-2 px-6 py-6 md:px-8 md:py-7 text-center">
-        <div className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-heading font-bold">
+      <div className="flex h-36 shrink-0 flex-col gap-2 px-4 py-4 text-center md:h-40 md:px-6 md:py-5">
+        <div className="flex min-h-9 items-center justify-center text-[9px] font-heading font-bold uppercase leading-tight tracking-[0.25em] text-white/50 md:text-[10px] md:tracking-[0.3em]">
           {officer.role}
         </div>
-        <div className="text-lg md:text-xl font-display uppercase tracking-[0.12em] text-white min-h-[2rem] flex items-center justify-center">
+        <div className="flex min-h-8 items-center justify-center text-sm font-display uppercase leading-tight tracking-[0.1em] text-white md:text-base">
           {officer.name}
         </div>
+        {(officer.email || officer.facebook) && (
+          <div className="relative z-10 flex h-7 justify-center gap-2 pt-1">
+            {officer.email && (
+              <a
+                href={`mailto:${officer.email}`}
+                aria-label={`Email ${officer.name}`}
+                className="flex h-7 w-7 shrink-0 items-center justify-center border border-white/15 text-white/50 transition-colors hover:border-white/50 hover:text-white [transform:translateZ(1px)]"
+              >
+                <IconMail size={15} stroke={1.5} />
+              </a>
+            )}
+            {officer.facebook && (
+              <a
+                href={officer.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${officer.name}'s Facebook profile`}
+                className="flex h-7 w-7 shrink-0 items-center justify-center border border-white/15 text-white/50 transition-colors hover:border-white/50 hover:text-white [transform:translateZ(1px)]"
+              >
+                <IconBrandFacebook size={15} stroke={1.5} />
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -109,7 +138,6 @@ function FlippableCard({
         className="transition-transform duration-200 ease-out will-change-transform"
         style={{
           transform: `perspective(800px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) scale(${tilt.scale})`,
-          transformStyle: "preserve-3d",
         }}
       >
         <div style={{ perspective: 1000 }}>
@@ -217,6 +245,7 @@ function OrgPyramid({ flipped }: { flipped: boolean }) {
    ──────────────────────────────────────────────────────────── */
 export default function OfficersSection() {
   const [flipped, setFlipped] = useState(false);
+  const adviser = flipped ? ccsElitesAdviser : facultyAdviser;
 
   return (
     <section
@@ -238,7 +267,7 @@ export default function OfficersSection() {
             </h2>
           </div>
           <p className="text-sm md:text-base text-white/70 leading-relaxed font-sans max-w-md">
-            The dedicated teams leading our organizations, driving innovation, and ensuring the success of our initiatives.
+            The student leaders driving learning, collaboration, growth, and meaningful initiatives within PLP COMSOC.
           </p>
         </motion.div>
 
@@ -266,29 +295,68 @@ export default function OfficersSection() {
             <h3 className="text-sm font-heading font-bold tracking-[0.3em] uppercase text-white/50">
               Faculty Adviser
             </h3>
-            <div className="flex flex-col sm:flex-row items-start gap-8 group cursor-default">
-              <div className="relative w-32 h-40 overflow-hidden border border-white/10 shrink-0 group-hover:border-emerald-400/30 transition-colors duration-500">
-                <svg
-                  viewBox="0 0 200 250"
-                  className="absolute inset-0 w-full h-full text-white/[0.06]"
-                  aria-hidden="true"
-                >
-                  <g stroke="currentColor" strokeWidth="1" fill="none">
-                    <circle cx="100" cy="78" r="34" />
-                    <path d="M40 250c6-46 32-70 60-70s54 24 60 70" />
-                    <line x1="0" y1="250" x2="200" y2="250" strokeWidth="4" />
-                  </g>
-                </svg>
-              </div>
-              <div className="flex flex-col pt-2 gap-4">
-                <div className="text-3xl md:text-4xl font-display uppercase tracking-[0.1em] text-white">
-                  {facultyAdviser.name}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={flipped ? "elites-adviser" : "comsoc-adviser"}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3, ease }}
+                className="flex flex-col items-start gap-8 sm:flex-row"
+              >
+                <div className="relative h-40 w-32 shrink-0 overflow-hidden border border-white/10 bg-[#0c0c0e]">
+                  {adviser.image ? (
+                    <Image
+                      src={adviser.image}
+                      alt={adviser.name}
+                      fill
+                      className="object-cover"
+                      sizes="128px"
+                    />
+                  ) : (
+                    <svg
+                      viewBox="0 0 200 250"
+                      className="absolute inset-0 h-full w-full text-white/[0.06]"
+                      aria-hidden="true"
+                    >
+                      <g stroke="currentColor" strokeWidth="1" fill="none">
+                        <circle cx="100" cy="78" r="34" />
+                        <path d="M40 250c6-46 32-70 60-70s54 24 60 70" />
+                        <line x1="0" y1="250" x2="200" y2="250" strokeWidth="4" />
+                      </g>
+                    </svg>
+                  )}
                 </div>
-                <div className="text-base font-sans text-white/60">
-                  {facultyAdviser.department}
+                <div className="flex flex-col gap-4 pt-2">
+                  <div className="text-3xl font-display uppercase tracking-[0.1em] text-white md:text-4xl">
+                    {adviser.name}
+                  </div>
+                  <div className="text-base font-sans text-white/60">
+                    {adviser.department}
+                  </div>
+                  {adviser.email && adviser.facebook && (
+                    <div className="flex gap-2 pt-1">
+                      <a
+                        href={`mailto:${adviser.email}`}
+                        aria-label={`Email ${adviser.name}`}
+                        className="flex h-9 w-9 items-center justify-center border border-white/15 text-white/50 transition-colors hover:border-white/50 hover:text-white"
+                      >
+                        <IconMail size={16} stroke={1.5} />
+                      </a>
+                      <a
+                        href={adviser.facebook}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${adviser.name}'s Facebook profile`}
+                        className="flex h-9 w-9 items-center justify-center border border-white/15 text-white/50 transition-colors hover:border-white/50 hover:text-white"
+                      >
+                        <IconBrandFacebook size={16} stroke={1.5} />
+                      </a>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Contact Information */}

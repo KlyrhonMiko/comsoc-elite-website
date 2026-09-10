@@ -53,14 +53,14 @@ function FacultyCard({
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="flex flex-col w-full aspect-[4/5] border border-white/10 bg-white/[0.02] transition-transform duration-200 ease-out will-change-transform"
+        className="flex h-[330px] w-full flex-col border border-white/10 bg-white/[0.02] transition-transform duration-200 ease-out will-change-transform md:h-[400px]"
         style={{
           transform: `perspective(800px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) scale(${tilt.scale})`,
           transformStyle: "preserve-3d",
         }}
       >
         {/* Portrait */}
-        <div className="relative w-full h-full overflow-hidden border-b border-white/10 bg-[#0c0c0e]">
+        <div className="relative min-h-0 w-full flex-1 overflow-hidden border-b border-white/10 bg-[#0c0c0e]">
           {faculty.image ? (
             <Image
               src={faculty.image}
@@ -85,11 +85,11 @@ function FacultyCard({
           <div className="absolute inset-0 bg-gradient-to-t from-[#121212]/60 via-transparent to-transparent pointer-events-none" />
         </div>
         {/* Text */}
-        <div className="flex flex-col gap-2 px-6 py-6 md:px-8 md:py-7 text-center">
-          <div className="text-[10px] uppercase tracking-[0.35em] text-white/50 font-heading font-bold">
+        <div className="flex h-28 shrink-0 flex-col justify-center gap-2 px-4 py-4 text-center md:h-32 md:px-6 md:py-5">
+          <div className="text-[9px] uppercase tracking-[0.25em] text-white/50 font-heading font-bold md:text-[10px] md:tracking-[0.3em]">
             {faculty.department}
           </div>
-          <div className="text-lg md:text-xl font-display uppercase tracking-[0.12em] text-white min-h-[2rem] flex items-center justify-center">
+          <div className="flex min-h-8 items-center justify-center text-base font-display uppercase leading-tight tracking-[0.1em] text-white md:text-lg">
             {faculty.name}
           </div>
         </div>

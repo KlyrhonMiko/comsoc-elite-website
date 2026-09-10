@@ -24,46 +24,45 @@ export default function MembershipSection() {
             </h2>
           </div>
           <p className="text-sm md:text-base text-white/70 leading-relaxed font-sans max-w-md">
-            Join the elite circle of student developers, designers, and innovators. Unlock exclusive resources, mentorship, and opportunities.
+            Build skills, connections, leadership experience, and a stronger foundation for your future career in technology.
           </p>
         </motion.div>
 
         {/* Membership Details */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 items-stretch gap-16 lg:grid-cols-2 lg:gap-24">
           
-          {/* Information & Requirements */}
+          {/* Membership Overview */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col gap-12"
+            className="flex h-full flex-col gap-12 border border-white/10 bg-white/[0.02] p-8 md:p-12"
           >
             <div className="flex flex-col gap-6">
               <h3 className="text-2xl md:text-3xl font-heading font-light tracking-[0.2em] uppercase text-white/90">
-                Information
+                About Membership
               </h3>
               <p className="text-white/60 leading-relaxed font-sans">
-                Membership in the Elite Computer Science Society is more than just a title. It grants you access to premium workshops, specialized tech summits, networking events with industry leaders, and our private community discord where collaboration thrives.
+                The PLP Computer Society has consistently fostered technological competence, leadership, and community engagement among students of the College of Computer Studies.
               </p>
             </div>
-
             <div className="flex flex-col gap-6">
               <h3 className="text-2xl md:text-3xl font-heading font-light tracking-[0.2em] uppercase text-white/90">
-                Requirements
+                Member Experience
               </h3>
-              <ul className="flex flex-col gap-4 text-white/60 font-sans border-t border-white/10 pt-6">
-                <li className="flex items-start gap-4">
-                  <span className="text-white/40 mt-1">✦</span>
-                  <span>Currently enrolled as a student in a recognized computing or engineering program.</span>
+              <ul className="flex flex-col gap-3 text-white/60 font-sans">
+                <li className="flex items-start gap-3">
+                  <span className="text-white/40 mt-0.5">✦</span>
+                  <span><strong className="font-medium text-white/80">Leadership experience:</strong> gain experience in organizing events, teamwork, communication, and student leadership.</span>
                 </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-white/40 mt-1">✦</span>
-                  <span>A strong passion for technology, coding, or digital design.</span>
+                <li className="flex items-start gap-3">
+                  <span className="text-white/40 mt-0.5">✦</span>
+                  <span><strong className="font-medium text-white/80">Participation in activities:</strong> join student organization events and activities related to your course and interests.</span>
                 </li>
-                <li className="flex items-start gap-4">
-                  <span className="text-white/40 mt-1">✦</span>
-                  <span>Willingness to actively participate in society events and contribute to the community.</span>
+                <li className="flex items-start gap-3">
+                  <span className="text-white/40 mt-0.5">✦</span>
+                  <span><strong className="font-medium text-white/80">Access to opportunities and announcements:</strong> stay informed about CCS-related activities, projects, and opportunities.</span>
                 </li>
               </ul>
             </div>
@@ -75,7 +74,7 @@ export default function MembershipSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="flex flex-col gap-12 bg-white/[0.02] border border-white/10 p-8 md:p-12 h-full justify-between"
+            className="flex h-full flex-col gap-12 border border-white/10 bg-white/[0.02] p-8 md:p-12"
           >
             <div className="flex flex-col gap-8">
               <h3 className="text-2xl md:text-3xl font-heading font-light tracking-[0.2em] uppercase text-white/90">
@@ -84,23 +83,15 @@ export default function MembershipSection() {
               <ul className="flex flex-col gap-3 text-white/60 font-sans">
                 <li className="flex items-start gap-3">
                   <span className="text-white/40 mt-0.5">✦</span>
-                  <span>Exclusive access to workshops, hackathons, and tech summits.</span>
+                  <span><strong className="font-medium text-white/80">Academic and professional development:</strong> opportunities to join seminars, workshops, competitions, and peer-learning activities.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-white/40 mt-0.5">✦</span>
-                  <span>Mentorship from industry professionals and alumni.</span>
+                  <span><strong className="font-medium text-white/80">Networking:</strong> meet students from different year levels and build connections within CCS.</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-white/40 mt-0.5">✦</span>
-                  <span>Networking events with tech leaders and peers.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-white/40 mt-0.5">✦</span>
-                  <span>Priority placement for internships and job opportunities.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-white/40 mt-0.5">✦</span>
-                  <span>Access to our private community discord and resources.</span>
+                  <span><strong className="font-medium text-white/80">Experience for your future career:</strong> build portfolio- and resume-ready experience through projects, competitions, seminars, and organizational work.</span>
                 </li>
               </ul>
             </div>

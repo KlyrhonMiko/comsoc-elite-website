@@ -34,7 +34,7 @@ export default function AboutSection() {
             </h2>
           </div>
           <p className="text-sm md:text-base text-white/70 leading-relaxed font-sans max-w-md">
-            We are the driving force behind the college&apos;s technological advancement, uniting passionate minds to build a smarter future.
+            PLP Computer Society is an organization for the students, by the students, built to be a space for learning, collaboration, and growth.
           </p>
         </motion.div>
 
@@ -51,7 +51,7 @@ export default function AboutSection() {
               Mission
             </h3>
             <p className="text-sm md:text-base text-white/60 leading-relaxed font-sans">
-              To empower students with cutting-edge technical skills, foster a culture of continuous learning, and provide a platform for collaborative innovation that addresses real-world challenges.
+              To equip members with the skills, values, and global competitiveness needed in the tech industry through meaningful projects and activities.
             </p>
           </motion.div>
           <motion.div 
@@ -65,7 +65,7 @@ export default function AboutSection() {
               Vision
             </h3>
             <p className="text-sm md:text-base text-white/60 leading-relaxed font-sans">
-              To be the premier recognized student organization that cultivates the next generation of tech leaders, renowned for excellence, creativity, and impactful technological solutions.
+              To create a community that fosters information exchange and prepares future professionals in the technology field.
             </p>
           </motion.div>
         </div>

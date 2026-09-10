@@ -105,7 +105,7 @@ export default function HeroSection() {
             ✦ ✦ ✦
           </div>
           <p className="text-xs md:text-sm text-white/70 leading-relaxed font-sans max-w-[300px] md:max-w-lg text-center mx-auto">
-            A premier organization dedicated to fostering innovation, technical excellence, and a collaborative community among students. We provide resources, workshops, and opportunities to build the future of technology together.
+            An organization for the students, by the students, built as a space for learning, collaboration, and growth.
           </p>
         </motion.div>
 
