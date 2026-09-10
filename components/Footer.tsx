@@ -1,69 +1,105 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { IconBrandFacebook } from "@tabler/icons-react";
+import {
+  IconArrowUpRight,
+  IconBrandFacebook,
+  IconMail,
+  IconPhone,
+} from "@tabler/icons-react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const barcodeWidths = [3, 1, 4, 2, 1, 5, 2, 1, 3, 2, 4, 1, 2, 3, 1, 2, 4, 1, 2, 5, 1, 3, 2, 4, 2, 1, 3];
+const navItems = [
+  { label: "Home", href: "#home" },
+  { label: "About us", href: "#about" },
+  { label: "Faculty", href: "#faculty" },
+  { label: "Officers", href: "#officers" },
+  { label: "Events", href: "#events" },
+  { label: "Membership", href: "#membership" },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a0a0a] w-full relative font-sans text-white border-t border-white/10">
-      {/* Top row */}
-      <div className="px-6 md:px-12 lg:px-16 pt-16 pb-12">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease }}
-            className="flex flex-col gap-6"
+    <footer className="w-full border-t border-white/10 bg-[#0a0a0a] font-sans text-white">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8, ease }}
+        className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 md:px-12 lg:grid-cols-[1.4fr_0.75fr_1fr] lg:px-16"
+      >
+        <div className="flex max-w-sm flex-col gap-5">
+          <div className="text-lg font-heading font-light uppercase tracking-[0.2em] text-white/90">
+            PLP Computer Society
+          </div>
+          <p className="text-sm leading-relaxed text-white/55">
+            A student-led space for learning, collaboration, and growth in the College of Computer Studies.
+          </p>
+          <a
+            href="https://www.facebook.com/share/14pXvfiSecT/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex w-fit items-center gap-3 border border-white/15 px-4 py-3 text-[10px] font-heading font-bold uppercase tracking-[0.22em] text-white/70 transition-colors hover:border-white/50 hover:text-white"
           >
-            <div className="text-lg font-heading font-light tracking-[0.2em] uppercase text-white/80">
-              Computer Society
-            </div>
-            <a
-              href="https://www.facebook.com/PLPCOMSOC"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 text-sm font-heading tracking-[0.15em] text-white/50 hover:text-white transition-colors duration-300"
-            >
-              <IconBrandFacebook className="w-5 h-5" strokeWidth={1.5} />
-              @college_of_computer_studies
-            </a>
-          </motion.div>
-
-          {/* Barcode */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, delay: 0.1, ease }}
-            className="flex flex-col items-end gap-2"
-          >
-            <div className="flex h-12 items-end gap-[2px] md:gap-[3px] opacity-80">
-              {barcodeWidths.map((w, i) => (
-                <div key={i} className="bg-white h-full" style={{ width: `${w}px` }} />
-              ))}
-            </div>
-            <div className="flex justify-between w-full max-w-[9rem] text-[10px] tracking-[0.4em] font-heading uppercase font-bold">
-              <span>COM</span>
-              <span>SOC</span>
-            </div>
-          </motion.div>
+            <IconBrandFacebook size={16} stroke={1.5} />
+            Connect on Facebook
+            <IconArrowUpRight size={14} stroke={1.5} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
         </div>
-      </div>
 
-      {/* Bottom row */}
-      <div className="px-6 md:px-12 lg:px-16 py-8 border-t border-white/10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-heading">
-            CCS Computer Society
+        <nav aria-label="Footer navigation" className="flex flex-col gap-5">
+          <div className="text-[10px] font-heading font-bold uppercase tracking-[0.3em] text-white/35">
+            Navigation
           </div>
-          <div className="text-[10px] text-white/20 font-sans">
-            &copy; {new Date().getFullYear()} College of Computer Studies
+          <div className="grid grid-cols-2 gap-x-6 gap-y-3 lg:grid-cols-1">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="w-fit text-sm text-white/55 transition-colors hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
+        </nav>
+
+        <div className="flex flex-col gap-5">
+          <div className="text-[10px] font-heading font-bold uppercase tracking-[0.3em] text-white/35">
+            Contact
+          </div>
+          <div className="flex flex-col gap-4 text-sm text-white/55">
+            <a href="mailto:valles_zarrahexekiel@plpasig.edu.ph" className="flex items-start gap-3 transition-colors hover:text-white">
+              <IconMail size={16} stroke={1.5} className="mt-0.5 shrink-0" />
+              <span>valles_zarrahexekiel@plpasig.edu.ph</span>
+            </a>
+            <a href="mailto:zarrahexekiel@gmail.com" className="flex items-start gap-3 transition-colors hover:text-white">
+              <IconMail size={16} stroke={1.5} className="mt-0.5 shrink-0" />
+              <span>zarrahexekiel@gmail.com</span>
+            </a>
+            <a href="tel:+639153868047" className="flex items-center gap-3 transition-colors hover:text-white">
+              <IconPhone size={16} stroke={1.5} className="shrink-0" />
+              <span>0915 386 8047</span>
+            </a>
+          </div>
+        </div>
+      </motion.div>
+
+      <div className="border-t border-white/10 px-6 py-6 md:px-12 lg:px-16">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 text-[10px] font-heading uppercase tracking-[0.2em] text-white/35 sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} PLP Computer Society</span>
+          <span>College of Computer Studies</span>
+          <a
+            href="https://www.facebook.com/share/14pXvfiSecT/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="PLP Computer Society on Facebook"
+            className="flex w-fit items-center gap-2 transition-colors hover:text-white"
+          >
+            <IconBrandFacebook size={15} stroke={1.5} />
+            Facebook
+          </a>
         </div>
       </div>
     </footer>
