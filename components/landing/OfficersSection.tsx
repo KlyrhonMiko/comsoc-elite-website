@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowRightLeft } from "lucide-react";
@@ -27,13 +27,13 @@ function CardFace({ officer }: { officer: Officer }) {
   return (
     <div className="flex flex-col w-full aspect-[4/5] border border-white/10 bg-white/[0.02]">
       {/* Portrait */}
-      <div className="relative w-full h-full overflow-hidden border-b border-white/10 bg-[#0c0c0e] group">
+      <div className="relative w-full h-full overflow-hidden border-b border-white/10 bg-[#0c0c0e]">
         {officer.image ? (
           <Image
             src={officer.image}
             alt={officer.name}
             fill
-            className="object-cover grayscale group-hover:grayscale-0 contrast-125 transition-all duration-500"
+            className="object-cover contrast-125"
             sizes="(max-width: 640px) 50vw, 25vw"
           />
         ) : (
@@ -65,7 +65,7 @@ function CardFace({ officer }: { officer: Officer }) {
 }
 
 /* ────────────────────────────────────────────────────────────
-   FlippableCard — 3D flip card with front + back faces
+   FlippableCard — 3D flip card with front + back faces + tilt
    ──────────────────────────────────────────────────────────── */
 function FlippableCard({
   front,
@@ -78,37 +78,67 @@ function FlippableCard({
   flipped: boolean;
   delay?: number;
 }) {
+  const tiltRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!tiltRef.current) return;
+    const rect = tiltRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setTilt({
+      rotateX: (0.5 - y) * 12,
+      rotateY: (x - 0.5) * 12,
+      scale: 1.03,
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setTilt({ rotateX: 0, rotateY: 0, scale: 1 });
+  }, []);
+
   return (
     <motion.div
       {...fadeUp}
       transition={{ duration: 0.8, delay, ease }}
-      className="group"
-      style={{ perspective: 1000 }}
     >
-      <motion.div
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.6, delay: delay * 0.5, ease }}
-        className="relative w-full"
-        style={{ transformStyle: "preserve-3d" }}
+      <div
+        ref={tiltRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="transition-transform duration-200 ease-out will-change-transform"
+        style={{
+          transform: `perspective(800px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) scale(${tilt.scale})`,
+          transformStyle: "preserve-3d",
+        }}
       >
-        {/* Front face (COMSOC) — normal flow, establishes height */}
-        <motion.div
-          animate={{ opacity: flipped ? 0 : 1 }}
-          transition={{ duration: 0.3, delay: delay * 0.5 }}
-        >
-          <CardFace officer={front} />
-        </motion.div>
+        <div style={{ perspective: 1000 }}>
+          <motion.div
+            animate={{ rotateY: flipped ? 180 : 0 }}
+            transition={{ duration: 0.6, delay: delay * 0.5, ease }}
+            className="relative w-full"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            {/* Front face (COMSOC) — normal flow, establishes height */}
+            <motion.div
+              animate={{ opacity: flipped ? 0 : 1 }}
+              transition={{ duration: 0.3, delay: delay * 0.5 }}
+            >
+              <CardFace officer={front} />
+            </motion.div>
 
-        {/* Back face (CCS ELITES) — absolute overlay */}
-        <motion.div
-          animate={{ opacity: flipped ? 1 : 0 }}
-          transition={{ duration: 0.3, delay: delay * 0.5 }}
-          className="absolute inset-0 w-full h-full"
-          style={{ transform: "rotateY(180deg)" }}
-        >
-          <CardFace officer={back} />
-        </motion.div>
-      </motion.div>
+            {/* Back face (CCS ELITES) — absolute overlay */}
+            <motion.div
+              animate={{ opacity: flipped ? 1 : 0 }}
+              transition={{ duration: 0.3, delay: delay * 0.5 }}
+              className="absolute inset-0 w-full h-full"
+              style={{ transform: "rotateY(180deg)" }}
+            >
+              <CardFace officer={back} />
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
     </motion.div>
   );
 }
