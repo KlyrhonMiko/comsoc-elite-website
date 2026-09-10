@@ -27,13 +27,13 @@ function CardFace({ officer }: { officer: Officer }) {
   return (
     <div className="flex flex-col w-full aspect-[4/5] border border-white/10 bg-white/[0.02]">
       {/* Portrait */}
-      <div className="relative w-full h-full overflow-hidden border-b border-white/10 bg-[#0c0c0e]">
+      <div className="relative w-full h-full overflow-hidden border-b border-white/10 bg-[#0c0c0e] group">
         {officer.image ? (
           <Image
             src={officer.image}
             alt={officer.name}
             fill
-            className="object-cover grayscale contrast-125"
+            className="object-cover grayscale group-hover:grayscale-0 contrast-125 transition-all duration-500"
             sizes="(max-width: 640px) 50vw, 25vw"
           />
         ) : (
@@ -201,7 +201,7 @@ export default function OfficersSection() {
         >
           <div>
             <div className="text-xl md:text-2xl font-light text-white/50 mb-4 font-heading tracking-wider">
-              \\ 03
+              \\ 04
             </div>
             <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-display font-light tracking-[0.15em] leading-[1] uppercase text-white">
               Officers <br /> &amp; Teams

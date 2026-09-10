@@ -1,6 +1,7 @@
 import HeroSection from "@/components/landing/HeroSection";
 import AboutSection from "@/components/landing/AboutSection";
 import OfficersSection from "@/components/landing/OfficersSection";
+import FacultySection from "@/components/landing/FacultySection";
 import EventsSection from "@/components/landing/EventsSection";
 import MembershipSection from "@/components/landing/MembershipSection";
 import ContactSection from "@/components/landing/ContactSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <SideNav />
       <HeroSection />
       <AboutSection />
+      <FacultySection />
       <OfficersSection />
       <EventsSection />
       <MembershipSection />

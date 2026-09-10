@@ -17,7 +17,7 @@ export default function MembershipSection() {
         >
           <div>
             <div className="text-xl md:text-2xl font-light text-white/80 mb-4 font-heading tracking-wider">
-              \\ 05
+              \\ 06
             </div>
             <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-display font-light tracking-[0.15em] leading-[1] uppercase text-white">
               Membership
