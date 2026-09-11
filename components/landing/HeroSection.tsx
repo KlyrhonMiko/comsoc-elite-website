@@ -7,6 +7,16 @@ import { useState } from "react";
 
 import { upcomingEvents } from "@/lib/data/events";
 
+const navItems = [
+  { name: "Home", href: "#home", num: "01" },
+  { name: "About", href: "#about", num: "02" },
+  { name: "Faculty", href: "#faculty", num: "03" },
+  { name: "Officers", href: "#officers", num: "04" },
+  { name: "Events", href: "#events", num: "05" },
+  { name: "Membership", href: "#membership", num: "06" },
+  { name: "Contact", href: "#contact", num: "07" },
+];
+
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -59,13 +69,7 @@ export default function HeroSection() {
           className="hidden md:flex flex-col gap-6 absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 z-20 font-heading text-xs tracking-[0.3em] uppercase pointer-events-auto"
         >
           <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-white/20 mb-2 ml-2" />
-          {[
-            { name: "Home", href: "#home", num: "01" },
-            { name: "About", href: "#about", num: "02" },
-            { name: "Officers", href: "#officers", num: "03" },
-            { name: "Events", href: "#events", num: "04" },
-            { name: "Contact", href: "#contact", num: "05" }
-          ].map((item) => (
+          {navItems.map((item) => (
             <a key={item.name} href={item.href} className="group flex items-center gap-4 text-white/50 hover:text-white transition-all duration-500">
               <span className="text-[9px] font-light opacity-50 group-hover:opacity-100 transition-opacity">/{item.num}</span>
               <span className="relative overflow-hidden pb-1 whitespace-nowrap">
@@ -154,13 +158,7 @@ export default function HeroSection() {
           <button className="absolute top-8 right-8 text-white" onClick={() => setMenuOpen(false)}>
             <X className="w-8 h-8" />
           </button>
-          {[
-            { name: "Home", href: "#home" },
-            { name: "About", href: "#about" },
-            { name: "Officers", href: "#officers" },
-            { name: "Events", href: "#events" },
-            { name: "Contact", href: "#contact" }
-          ].map((item) => (
+          {navItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
