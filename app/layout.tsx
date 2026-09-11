@@ -26,8 +26,8 @@ const spaceGroteskHeading = Space_Grotesk({
 export const metadata: Metadata = {
   title: "College of Computer Studies — Computer Society",
   description:
-    "We craft elegant digital experiences with precision and artistry. The College of Computer Studies Computer Society specializes in premium web solutions.",
-  keywords: ["design studio", "web design", "premium", "digital experiences"],
+    "The official website of the PLP College of Computer Studies Computer Society, connecting students through learning, leadership, events, and collaboration.",
+  keywords: ["PLP Computer Society", "College of Computer Studies", "student organization", "Pasig"],
 };
 
 export default function RootLayout({
@@ -47,4 +47,3 @@ export default function RootLayout({
     </html>
   );
 }
-// trigger rebuild

@@ -366,7 +366,7 @@ export default function OfficersSection() {
             </h3>
             <div className="flex flex-col w-full">
               {[
-                { label: "Email", value: "ccs.elite@university.edu", icon: "✉" },
+                { label: "Email", value: "ccsliteswashere", icon: "✉" },
                 { label: "Office", value: "CCS Building, Room 402", icon: "📍" },
                 { label: "Social", value: "@ccs_elite_org", icon: "❖" },
               ].map((info, idx) => (

@@ -117,8 +117,10 @@ export const facultyAdviser: Adviser = {
 
 export const ccsElitesAdviser: Adviser = {
   role: "Faculty Adviser",
-  name: "———",
+  name: "Rebecca Fajardo",
   department: "CCS ELITES",
+  image: "/images/faculty/FAJARDO, REBECCA_4759.JPG",
+  email: "fajardo_rebecca@plpasig.edu.ph",
 };
 
 export const orgContact = {

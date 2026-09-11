@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, User } from "lucide-react";
+import { facultyAdviser } from "@/lib/data/officers";
 
 export default function ContactSection() {
   return (
@@ -44,8 +45,8 @@ export default function ContactSection() {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 group-hover:bg-emerald-400 transition-colors shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
               Official Email
             </div>
-            <a href="mailto:ccselite@university.edu.ph" className="text-[clamp(1rem,5vw,2.25rem)] md:text-4xl lg:text-5xl font-display uppercase tracking-wider text-white group-hover:text-white/90 transition-colors break-all">
-              ccselite@university.edu.ph
+            <a href="mailto:valles_zarrahexekiel@plpasig.edu.ph" className="text-[clamp(1rem,5vw,2.25rem)] md:text-4xl lg:text-5xl font-display uppercase tracking-wider text-white group-hover:text-white/90 transition-colors break-all">
+              valles_zarrahexekiel@plpasig.edu.ph
             </a>
             <div className="hidden md:flex justify-end w-24 lg:w-32">
                <Mail className="w-6 h-6 text-white/20 group-hover:text-white/60 transition-colors" />
@@ -65,17 +66,17 @@ export default function ContactSection() {
               Social Media
             </div>
             <div className="flex gap-4 md:gap-8 flex-col sm:flex-row sm:items-center">
-              <a href="#" className="text-xl md:text-3xl font-display uppercase tracking-wider text-white/70 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-white after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500">
+              <a href="https://www.facebook.com/PLPCOMSOC" target="_blank" rel="noopener noreferrer" className="text-xl md:text-3xl font-display uppercase tracking-wider text-white/70 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-white after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500">
                 Facebook
               </a>
               <span className="text-white/20 text-xl md:text-3xl hidden sm:inline-block">/</span>
-              <a href="#" className="text-xl md:text-3xl font-display uppercase tracking-wider text-white/70 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-white after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500">
+              <span aria-disabled="true" className="text-xl md:text-3xl font-display uppercase tracking-wider text-white/30 cursor-not-allowed">
                 Twitter
-              </a>
+              </span>
               <span className="text-white/20 text-xl md:text-3xl hidden sm:inline-block">/</span>
-              <a href="#" className="text-xl md:text-3xl font-display uppercase tracking-wider text-white/70 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-white after:origin-right after:scale-x-0 hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500">
+              <span aria-disabled="true" className="text-xl md:text-3xl font-display uppercase tracking-wider text-white/30 cursor-not-allowed">
                 Instagram
-              </a>
+              </span>
             </div>
             <div className="hidden md:block w-24 lg:w-32" />
           </motion.div>
@@ -94,7 +95,7 @@ export default function ContactSection() {
             </div>
             <div className="flex flex-col items-start md:flex-row md:items-baseline gap-2 md:gap-6">
               <span className="text-2xl md:text-4xl lg:text-5xl font-display uppercase tracking-wider text-white group-hover:text-white/90 transition-colors">
-                Prof. Jane Doe
+                {facultyAdviser.name}
               </span>
               <span className="text-sm md:text-base font-sans text-white/40 tracking-[0.1em] uppercase">
                 College of Computer Studies
