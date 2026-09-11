@@ -6,10 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const navItems = [
   { id: "01", name: "HOME", href: "#home" },
   { id: "02", name: "ABOUT", href: "#about" },
-  { id: "03", name: "OFFICERS", href: "#officers" },
-  { id: "04", name: "EVENTS", href: "#events" },
-  { id: "05", name: "BUDGET", href: "#budget" },
-  { id: "06", name: "CONTACT", href: "#contact" },
+  { id: "03", name: "FACULTY", href: "#faculty" },
+  { id: "04", name: "OFFICERS", href: "#officers" },
+  { id: "05", name: "EVENTS", href: "#events" },
+  { id: "06", name: "MEMBERSHIP", href: "#membership" },
+  { id: "07", name: "CONTACT", href: "#contact" },
 ];
 
 export default function SideNav() {
@@ -60,11 +61,14 @@ export default function SideNav() {
           className="fixed bottom-6 md:bottom-auto top-auto md:top-1/2 left-1/2 md:left-auto -translate-x-1/2 md:translate-x-0 md:right-10 translate-y-0 md:-translate-y-1/2 z-50 flex flex-row md:flex-col gap-2 md:gap-6 pointer-events-none"
         >
           {navItems.map((item) => {
-            const isActive = activeSection === item.href.substring(1);
+            const section = item.href.substring(1);
+            const isActive = activeSection === section;
             return (
               <a
                 key={item.id}
                 href={item.href}
+                onClick={() => setActiveSection(section)}
+                aria-current={isActive ? "location" : undefined}
                 className="group pointer-events-auto flex items-center justify-end gap-4"
               >
                 {/* Text that slides in on hover (Desktop only) */}

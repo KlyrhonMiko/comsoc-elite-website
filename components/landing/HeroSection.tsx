@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import SilverSunrise from "./SilverSunrise";
+
 import { upcomingEvents } from "@/lib/data/events";
 
 export default function HeroSection() {
@@ -13,11 +13,9 @@ export default function HeroSection() {
   return (
     <div id="home" className="bg-[#121212] h-[100dvh] w-full relative overflow-hidden font-sans text-white flex flex-col">
       
-      {/* 3D Immersive Background */}
-      <div className="absolute inset-0 z-0">
-        <SilverSunrise />
-      </div>
-
+      {/* Background image — fades in independently */}
+      <div className="hero-bg absolute inset-0 z-0" />
+      
       {/* Main Content Overlay */}
       <div className="relative z-10 flex-1 p-6 md:p-8 lg:p-12 flex flex-col justify-between pointer-events-none w-full min-h-0">
         
@@ -25,7 +23,7 @@ export default function HeroSection() {
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="flex justify-between items-start pointer-events-auto w-full"
         >
           {/* Top Left (empty or small branding) */}
@@ -66,8 +64,7 @@ export default function HeroSection() {
             { name: "About", href: "#about", num: "02" },
             { name: "Officers", href: "#officers", num: "03" },
             { name: "Events", href: "#events", num: "04" },
-            { name: "Budget", href: "#budget", num: "05" },
-            { name: "Contact", href: "#contact", num: "06" }
+            { name: "Contact", href: "#contact", num: "05" }
           ].map((item) => (
             <a key={item.name} href={item.href} className="group flex items-center gap-4 text-white/50 hover:text-white transition-all duration-500">
               <span className="text-[9px] font-light opacity-50 group-hover:opacity-100 transition-opacity">/{item.num}</span>
@@ -108,7 +105,7 @@ export default function HeroSection() {
             ✦ ✦ ✦
           </div>
           <p className="text-xs md:text-sm text-white/70 leading-relaxed font-sans max-w-[300px] md:max-w-lg text-center mx-auto">
-            A premier organization dedicated to fostering innovation, technical excellence, and a collaborative community among students. We provide resources, workshops, and opportunities to build the future of technology together.
+            An organization for the students, by the students, built as a space for learning, collaboration, and growth.
           </p>
         </motion.div>
 
@@ -162,7 +159,6 @@ export default function HeroSection() {
             { name: "About", href: "#about" },
             { name: "Officers", href: "#officers" },
             { name: "Events", href: "#events" },
-            { name: "Budget", href: "#budget" },
             { name: "Contact", href: "#contact" }
           ].map((item) => (
             <a
@@ -176,6 +172,9 @@ export default function HeroSection() {
           ))}
         </motion.div>
       )}
+
+      {/* Horizon Glow */}
+      <div className="horizon-glow" aria-hidden="true" />
 
       {/* Latest Event Marquee */}
       {upcomingEvents.length > 0 && (

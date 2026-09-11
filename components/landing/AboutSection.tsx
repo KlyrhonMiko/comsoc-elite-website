@@ -34,7 +34,7 @@ export default function AboutSection() {
             </h2>
           </div>
           <p className="text-sm md:text-base text-white/70 leading-relaxed font-sans max-w-md">
-            We are the driving force behind the college&apos;s technological advancement, uniting passionate minds to build a smarter future.
+            PLP Computer Society is an organization for the students, by the students, built to be a space for learning, collaboration, and growth.
           </p>
         </motion.div>
 
@@ -51,7 +51,7 @@ export default function AboutSection() {
               Mission
             </h3>
             <p className="text-sm md:text-base text-white/60 leading-relaxed font-sans">
-              To empower students with cutting-edge technical skills, foster a culture of continuous learning, and provide a platform for collaborative innovation that addresses real-world challenges.
+              To equip members with the skills, values, and global competitiveness needed in the tech industry through meaningful projects and activities.
             </p>
           </motion.div>
           <motion.div 
@@ -65,45 +65,10 @@ export default function AboutSection() {
               Vision
             </h3>
             <p className="text-sm md:text-base text-white/60 leading-relaxed font-sans">
-              To be the premier recognized student organization that cultivates the next generation of tech leaders, renowned for excellence, creativity, and impactful technological solutions.
+              To create a community that fosters information exchange and prepares future professionals in the technology field.
             </p>
           </motion.div>
         </div>
-
-        {/* Core Values */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col gap-12"
-        >
-          <h3 className="text-2xl md:text-3xl font-heading font-light tracking-[0.2em] uppercase text-white/90">
-            Core Values
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {coreValues.map((value, index) => (
-              <motion.div 
-                key={index} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col gap-4 group"
-              >
-                <div className="text-3xl md:text-4xl text-white/20 group-hover:text-white transition-colors duration-500 font-heading font-light">
-                  0{index + 1}
-                </div>
-                <div className="text-[10px] min-[360px]:text-xs sm:text-sm md:text-xl font-display uppercase tracking-widest md:tracking-[0.15em] text-white/80 group-hover:text-white transition-colors duration-300 break-words hyphens-auto">
-                  {value}
-                </div>
-                <div className="w-full h-[1px] bg-white/10 group-hover:bg-white/50 transition-colors duration-500"></div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-
       </div>
     </section>
   );
