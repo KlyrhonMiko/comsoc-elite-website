@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ContentStatus {
+  draft
+  published
+  archived
+
+  @@map("content_status")
+}
+
+model FacultyMember {
+  id           String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  department   String
+  imageUrl     String?       @map("image_url")
+  displayOrder Int           @default(0) @map("display_order")
+  status       ContentStatus @default(draft)
+  updatedAt    DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("faculty_members")
+}
+
+model OrganizationPerson {
+  id           String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  role         String
+  organization String
+  personKind   String        @map("person_kind")
+  tier         Int           @default(0)
+  department   String?
+  email        String?
+  facebookUrl  String?       @map("facebook_url")
+  imageUrl     String?       @map("image_url")
+  displayOrder Int           @default(0) @map("display_order")
+  status       ContentStatus @default(draft)
+  updatedAt    DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("organization_people")
+}
+
+model Event {
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  slug          String        @unique
+  title         String
+  eventKind     String        @map("event_kind")
+  startsAt      DateTime      @map("starts_at") @db.Date
+  endsAt        DateTime?     @map("ends_at") @db.Date
+  location      String?
+  timeLabel     String?       @map("time_label")
+  budget        Decimal?      @db.Decimal(12, 2)
+  description   String?
+  coverImageUrl String?       @map("cover_image_url")
+  displayOrder  Int           @default(0) @map("display_order")
+  status        ContentStatus @default(draft)
+  updatedAt     DateTime      @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("events")
+}
+
+model MediaAsset {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  publicId     String   @unique @map("public_id")
+  url          String
+  resourceType String   @map("resource_type")
+  format       String?
+  bytes        Int?
+  width        Int?
+  height       Int?
+  altText      String?  @map("alt_text")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("media_assets")
+}

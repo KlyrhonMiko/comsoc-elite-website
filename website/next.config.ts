@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    const cmsOrigin = process.env.CMS_ORIGIN ?? "http://localhost:3001";
+
+    return [
+      { source: "/admin", destination: `${cmsOrigin}/admin` },
+      { source: "/admin/:path*", destination: `${cmsOrigin}/admin/:path*` },
+    ];
+  },
 };
 
 export default nextConfig;

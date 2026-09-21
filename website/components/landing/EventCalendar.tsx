@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { upcomingEvents } from "@/lib/data/events";
@@ -75,18 +75,18 @@ export default function EventCalendar({ onSelectRange }: EventCalendarProps = {}
     return () => window.removeEventListener("mouseup", handleGlobalMouseUp);
   }, []);
 
-  const handleMouseDown = useCallback((day: number) => {
+  const handleMouseDown = (day: number) => {
     const date = new Date(currentYear, currentMonth, day);
     setSelectionStart(date);
     setSelectionEnd(date);
     setIsDragging(true);
-  }, [currentYear, currentMonth]);
+  };
 
-  const handleMouseEnter = useCallback((day: number) => {
+  const handleMouseEnter = (day: number) => {
     if (isDragging) {
       setSelectionEnd(new Date(currentYear, currentMonth, day));
     }
-  }, [isDragging, currentYear, currentMonth]);
+  };
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
