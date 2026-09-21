@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth/admin";
-import { createClient } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
 
 const eventSchema = z.object({
   id: z.string().uuid().optional(),
@@ -15,6 +15,7 @@ const eventSchema = z.object({
   location: z.string().max(160).optional(),
   time_label: z.string().max(80).optional(),
   description: z.string().max(10000).optional(),
+  cover_image_url: z.string().url().optional().or(z.literal("")),
 });
 
 function data(formData: FormData) {
@@ -26,11 +27,9 @@ function data(formData: FormData) {
 export async function saveEvent(formData: FormData) {
   await requireAdmin();
   const values = data(formData);
-  const db = await createClient();
   const { id, ...record } = values;
-  const mutation = id ? db.from("events").update(record).eq("id", id) : db.from("events").insert(record);
-  const { error } = await mutation;
-  if (error) throw new Error("Unable to save event.");
+  const eventData = { slug: record.slug, title: record.title, eventKind: record.event_kind, startsAt: new Date(record.starts_at), status: record.status, location: record.location || null, timeLabel: record.time_label || null, description: record.description || null, coverImageUrl: record.cover_image_url || null };
+  if (id) await prisma.event.update({ where: { id }, data: eventData }); else await prisma.event.create({ data: eventData });
   revalidatePath("/content/events");
   revalidatePath("/content");
 }
@@ -38,9 +37,7 @@ export async function saveEvent(formData: FormData) {
 export async function deleteEvent(formData: FormData) {
   await requireAdmin();
   const id = z.string().uuid().parse(formData.get("id"));
-  const db = await createClient();
-  const { error } = await db.from("events").delete().eq("id", id);
-  if (error) throw new Error("Unable to delete event.");
+  await prisma.event.delete({ where: { id } });
   revalidatePath("/content/events");
   revalidatePath("/content");
 }
