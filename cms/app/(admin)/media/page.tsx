@@ -1,0 +1,3 @@
+export default function Media() {
+  return <><p className="font-mono text-[11px] tracking-[0.2em] text-emerald-300">ASSETS / MEDIA</p><h1 className="mt-3 font-display text-4xl font-light tracking-wide text-white">MEDIA LIBRARY</h1><section className="mt-10 max-w-2xl border border-dashed border-white/25 bg-[#111113] p-8"><h2 className="font-display text-xl font-light tracking-wide text-white">Storage connection required</h2><p className="mt-3 text-sm leading-6 text-white/55">Create the private `cms-media` bucket and apply the storage policies in the migration before enabling uploads. Upload requests must be authenticated, authorized, and validate image MIME type and size on the server.</p></section></>;
+}

@@ -5,13 +5,6 @@ import { motion } from "framer-motion";
 // About Section component for rendering organizational details.
 
 
-const coreValues = [
-  "Innovation",
-  "Collaboration",
-  "Excellence",
-  "Integrity",
-];
-
 export default function AboutSection() {
   return (
     <section id="about" className="bg-[#121212] w-full relative overflow-hidden font-sans text-white py-24 px-6 md:px-12 lg:px-16 border-t border-white/10">
